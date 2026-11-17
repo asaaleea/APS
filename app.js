@@ -127,7 +127,7 @@ function viewHrd() {
   const out = el('div');
   const detail = el('div');
   const form = searchForm([{ name: 'bulan', label: 'Bulan', type: 'month' }], ({ bulan }) => {
-    const list = LEAVES.filter((l) => !bulan || l.mulai.startsWith(bulan));
+    const list = LEAVES.filter((l) => l.status === 'diajukan' && (!bulan || l.mulai.startsWith(bulan)));
     showIn(out, list.length ? table(['Pegawai', 'Periode', 'Lama', 'Aksi'], list.map((l) => ({
       cells: [l.nama, l.mulai + ' s/d ' + l.selesai, dayCount(l.mulai, l.selesai) + ' hari',
         el('button', { className: 'secondary', textContent: 'Riwayat & sisa', onclick: () => showHistory(l.nama) })],
